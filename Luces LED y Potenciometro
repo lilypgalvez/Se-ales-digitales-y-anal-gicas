@@ -1,0 +1,109 @@
+int valor=0;
+ int led1 = 2;
+ int led2 = 3;
+ int led3 = 4;
+ int led4 = 5;
+ int led5 = 6;
+ int led6 = 7;
+ int led7 = 8;
+ int led8 = 9;
+//Encender y apagar un LED a través de un push botton
+ int BOTON = 11;
+ int numero = 0;
+ 
+
+ const int potenciometro = A3;
+ int valorPotenciometro;
+
+void setup(){
+  Serial.begin(9600);
+  pinMode(led1, OUTPUT);
+  pinMode(led2, OUTPUT);
+  pinMode(led3, OUTPUT);
+  pinMode(led4, OUTPUT);
+  pinMode(led5, OUTPUT);
+  pinMode(led6, OUTPUT);
+  pinMode(led7, OUTPUT);
+  pinMode(led8, OUTPUT);
+  pinMode(BOTON, INPUT);
+  pinMode(LDR, INPUT);
+  
+
+}
+  void loop() {
+/////////////////////////////////////////////////////  secuencia 2 (Usar con el push botton una intensidad de luz, de mayor a menor)
+///////////////////////////////////////////////////// Secuencia 4 ( que la mitad de luces enciendan por 1 segundo, y la otra mitad por 2 segundos)
+    
+  
+  //Arduino permite hacer uso del módulo PWM
+  //PWM es una función para implementar la modulación de ancho de pulso con nuestra placa Arduino
+  analogWrite (led1, valorpotencia(70));
+  analogWrite (led2, valorpotencia(60));
+  analogWrite (led3, valorpotencia(50));
+  analogWrite (led4, valorpotencia(40));
+  analogWrite (led5, valorpotencia(30));
+  analogWrite (led6, valorpotencia(20));
+  analogWrite (led7, valorpotencia(10));
+  analogWrite (led8, valorpotencia(0));
+  
+  
+
+    ////////////////////////////////////////////   secuencia 3 (Se ingresa un nùmero al monitor serial y se encienden una por una las luces)
+  Serial.print("Ingrese un número: ");
+  numero=Serial.parseInt();
+  if (numero==8) {
+    digitalWrite(led1, LOW);
+    analogWrite(led2, LOW);
+    analogWrite(led3, LOW);
+    analogWrite(led4, LOW);
+    analogWrite(led5, LOW);
+    analogWrite(led6, LOW);
+    analogWrite(led7, LOW);
+    analogWrite(led8, LOW);    
+    digitalWrite(led1, HIGH);
+    delay(2000);
+    digitalWrite(led2, HIGH);
+    delay(2000);
+    digitalWrite(led3, HIGH);
+    delay(2000);
+    digitalWrite(led4, HIGH);
+    delay(2000);
+    digitalWrite(led5, HIGH);
+    delay(2000);
+    digitalWrite(led6, HIGH);
+    delay(2000);
+    digitalWrite(led7, HIGH);
+    delay(2000);
+    digitalWrite(led8, HIGH);
+    delay(2000);
+    digitalWrite(led1, LOW);
+    delay(2000);
+    digitalWrite(led2, LOW);
+    delay(2000);
+    digitalWrite(led3, LOW);
+    delay(2000);
+    digitalWrite(led4, LOW);
+    delay(2000);
+    digitalWrite(led5, LOW);
+    delay(2000);
+    digitalWrite(led6, LOW);
+    delay(2000);
+    digitalWrite(led7, LOW);
+    delay(2000);
+    digitalWrite(led8, LOW);
+    delay(2000); 
+    numero = 0;       
+
+  }
+
+  
+}
+
+ int valorpotencia(int intensidad){
+    valorPotenciometro = analogRead(potenciometro);
+    Serial.println(valorPotenciometro);
+    return valorPotenciometro+intensidad;
+  }
+        
+    
+
