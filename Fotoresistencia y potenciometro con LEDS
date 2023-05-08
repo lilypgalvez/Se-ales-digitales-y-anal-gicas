@@ -1,0 +1,48 @@
+const int fotorresistenciaPin = A2; // Fotocel
+const int ledPin2 = 2; //Led de la fotocelda
+const int potPin = A1; // Potenciometro
+const int ledPin = 3; //Led del potenciometro
+int valorFotorresistencia = 0; // Variable para el valor de la Fotocelda
+int potValue = 0;
+int blinkSpeed = 0;
+
+void setup() {
+  Serial.begin(9600);
+
+  pinMode(ledPin, OUTPUT);
+  pinMode(ledPin2,OUTPUT);
+}
+
+void loop() {
+  potValue = analogRead(potPin);
+
+  blinkSpeed = map(potValue, 0, 1023, 0, 1000);
+
+  digitalWrite(ledPin, HIGH);
+
+  delay(blinkSpeed / 2);
+
+  digitalWrite(ledPin, LOW);
+
+  delay(blinkSpeed / 2);
+
+  Serial.print("Potenciometro: ");
+  Serial.print(potValue);
+  Serial.print(" | Velocidad de parpadeo: ");
+  Serial.print(blinkSpeed);
+  Serial.println("ms");
+
+     int valorFotorresistencia = analogRead(fotorresistenciaPin);
+  if (valorFotorresistencia > 980) { 
+    digitalWrite(ledPin2, HIGH); 
+    Serial.print("Valor de la fotorresistencia: ");
+    Serial.print(valorFotorresistencia);
+    Serial.println(", LED encendido");
+  } else {
+    digitalWrite(ledPin2, LOW);
+    Serial.print("Valor de la fotorresistencia: ");
+    Serial.print(valorFotorresistencia);
+    Serial.println(", LED apagado");
+  }
+  delay(800); // 
+}
